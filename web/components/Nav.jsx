@@ -2,15 +2,13 @@
  * @Author: lxj 1851816672@qq.com
  * @Date: 2023-12-24 05:11:34
  * @LastEditors: lxj 1851816672@qq.com
- * @LastEditTime: 2024-05-17 17:44:25
+ * @LastEditTime: 2024-05-18 04:07:10
  * @FilePath: /marketPlace/components/Nav.jsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
 import React, { useEffect, useState } from 'react'
 import styles from 'styles/Nav.module.css'
-import logo from 'public/logo.png'
-import twitter from '@/assets/image/svg/twitter.svg'
-import gitbook from '@/assets/image/svg/gitbook.svg'
+import logo from 'public/logo.jpg'
 import Image from 'next/image'
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useAccount, useNetwork } from 'wagmi'
@@ -38,9 +36,10 @@ const Nav = () => {
         <div className={styles.container}>
             <div className={styles.tittle}>
                 <Link href='/'>
-                    {/* <Image src={logo} alt='image' width={52} height={52} /> */}
-                </Link>
+                    <Image src={logo} alt='image' width={52} height={52} />
 
+                </Link>
+                DelphiX
             </div>
 
             <div className={styles.connectBtn}>
