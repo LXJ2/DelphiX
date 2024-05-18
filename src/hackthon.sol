@@ -38,10 +38,10 @@ contract hackthonProject is Ihackthon{
     }
 
     function init(string[] memory _tracks,string[] memory _team,uint _ENDTIME,uint _STOPTIME,address _usdt,address[] memory _adminList)external onlyFactory{
-        require(_ENDTIME>_STOPTIME);
-        require(tracks.length>0);
-        require(_team.length>0);
-        require(_usdt!=address(0));
+        // require(_ENDTIME>_STOPTIME);
+        // require(tracks.length>0);
+        // require(_team.length>0);
+        // require(_usdt!=address(0));
 
         adminList = _adminList;
         tracks = _tracks;
@@ -51,7 +51,7 @@ contract hackthonProject is Ihackthon{
         usdt = _usdt;
     }
 
-    function stake(string memory track,uint256 amount, string memory _team) external returns(bool){
+    function stake(string memory track,string memory _team,uint256 amount) external returns(bool){
         require(ENDTIME-block.timestamp>STOPTIME);
         require(IERC20(usdt).allowance(msg.sender,address(this))>0);
         require(IERC20(usdt).balanceOf(msg.sender)>0);

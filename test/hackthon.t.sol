@@ -18,13 +18,24 @@ contract HackthonTest is Test {
     address factory = makeAddr("factory");
 
     string[] _tracks;
-    uint256[] _team;
+    string[] _team;
     uint256 _ENDTIME;
     uint256 _STOPTIME;
     address _usdt;
     address[] _adminList;
 
     function setUp() public {
+        _usdt = 0xf55BEC9cafDbE8730f096Aa55dad6D22d44099Df;
+
+        deal(address(_usdt),admin, 1000000000000 ether);
+        deal(address(_usdt),alice, 1000000000000 ether);
+        deal(address(_usdt),david, 1000000000000 ether);
+        deal(address(_usdt),leo, 1000000000000 ether);
+        deal(address(_usdt),bob, 1000000000000 ether);
+
+        console.log("alice:", IERC20(_usdt).balanceOf(alice));
+        console.log("bob:", IERC20(_usdt).balanceOf(bob));
+
         vm.startPrank(admin);
         hackthon = new hackthonProject();
         hackthon.setFactory(factory);
@@ -37,10 +48,9 @@ contract HackthonTest is Test {
                 "track3",
                 "track4"
             ];
-        _team = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+        _team = ["0", "1", "2", "3"];
         _ENDTIME = block.number+50;
         _STOPTIME = 60;
-        _usdt = 0xf55BEC9cafDbE8730f096Aa55dad6D22d44099Df;
         _adminList = [admin,bob];
 
         vm.startPrank(factory);
@@ -53,27 +63,27 @@ contract HackthonTest is Test {
         vm.startPrank(alice);
         {
             IERC20(_usdt).approve(address(hackthon), 10 ether);
-            hackthon.stake("track1",1, 4 ether);
+            hackthon.stake("track1","1", 4 ether);
         }
         vm.stopPrank();
 
         vm.startPrank(leo);
         {
             IERC20(_usdt).approve(address(hackthon), 10 ether);
-            hackthon.stake("track1",1, 6 ether);
+            hackthon.stake("track1","1", 6 ether);
         }
         vm.stopPrank();
 
         vm.startPrank(bob);
         {
             IERC20(_usdt).approve(address(hackthon), 20 ether);
-            hackthon.stake("track1",2, 20 ether);
+            hackthon.stake("track1","2", 20 ether);
         }
         vm.stopPrank();
         vm.startPrank(david);
         {
             IERC20(_usdt).approve(address(hackthon), 10 ether);
-            hackthon.stake("track1",3,10 ether);
+            hackthon.stake("track1","3",10 ether);
         }
         vm.stopPrank();
 
