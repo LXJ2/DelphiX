@@ -170,3 +170,7 @@
 .ant-slider-rail {
   /*background-color: # !important;*/
 }
+
+.ant-layout-header {
+  background: #FFFFFF;
+}

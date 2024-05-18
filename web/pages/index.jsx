@@ -2,7 +2,7 @@
  * @Author: lxj 1851816672@qq.com
  * @Date: 2024-05-18 03:30:59
  * @LastEditors: lxj 1851816672@qq.com
- * @LastEditTime: 2024-05-18 11:09:45
+ * @LastEditTime: 2024-05-18 11:38:24
  * @FilePath: /DelphiX/web/pages/index.jsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -19,6 +19,8 @@ const ETHBeijing = () => {
   const [betsEndsTime, setBetsEndsTime] = useState('24:15:13')
   const [poolData, setPoolData] = useState(2301111)
   const [adressAmount, setAdressAmount] = useState(321)
+  const [poolAmount, setPoolAmount] = useState(321)
+
 
   const tabs = [{ index: 1, name: 'ETH Beijing' }, { index: 2, name: 'Upcoming Games' }]
 
@@ -29,6 +31,7 @@ const ETHBeijing = () => {
   const [value, setValue] = useState(0);
 
   const onDecrease = () => {
+    if (value == 0) return
     setValue(prevValue => prevValue - 1);
   };
 
@@ -74,14 +77,18 @@ const ETHBeijing = () => {
             <section>
               <Title level={2}>Teams</Title>
               <Row gutter={16}>
-                <Col span={6}>
+                <Col span={8}>
                   <Card title="DelphiX" bordered={false}>
                     <Paragraph>Intro</Paragraph>
                     <Paragraph>DelphiX is a web3 forecast market for developers competition focusing on hackathon as well as coder events.
                       It provides on chain staking to win the betting pool for layer 1 & layer 2 completition. Now it supports ETH Beijing as season 1.
                     </Paragraph>
-                    <Paragraph>Bets: 310</Paragraph>
-                    <div style={{ display: 'flex' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                      <Paragraph> Pool</Paragraph>
+                      <Paragraph> {poolAmount} USDT</Paragraph>
+                    </div>
+
+                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                       <div style={{ display: 'flex' }}>
                         <Button onClick={onDecrease}>-</Button>
                         <InputNumber
@@ -89,9 +96,9 @@ const ETHBeijing = () => {
                           value={value}
                           onChange={setValue}
                         />
-                        <Button onClick={onIncrease}>+</Button>
+                        <Button onClick={onIncrease} >+</Button>
                       </div>
-                      <Button type="primary">Bets</Button>
+                      <Button>Bets</Button>
                     </div>
 
                   </Card>
