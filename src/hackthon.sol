@@ -98,9 +98,8 @@ contract hackthonProject is Ihackthon{
         winningAmount = 0;
         trackAmount = getTrackAmount(track);
         stakeAmount = stakeNum[user][track];
-        winningAmount = trackAmount / stakeAmount;
+        winningAmount = stakeAmount/ trackAmount;
         return winningAmount
-        
     }
 
     function isStaked(string memory track,address user) internal view returns(bool) {
