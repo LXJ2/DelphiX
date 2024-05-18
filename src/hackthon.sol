@@ -12,7 +12,7 @@ contract hackthonProject is Ihackthon{
     mapping (address =>mapping(string=> uint256)) stakeNum;
     mapping (string =>uint256) trackAmount;
     mapping (address =>mapping(string=> uint256)) votedTrack;
-    mapping (address => mapping(string=>string)) votedTeam;
+    mapping (address => mapping(string=>string[])) votedTeam;
     uint public ENDTIME;
     uint public STOPTIME;
     address private factory;
@@ -58,17 +58,22 @@ contract hackthonProject is Ihackthon{
         IERC20(usdt).transferFrom(msg.sender,address(this),amount);
         stakeNum[msg.sender][track] +=amount;
         trackAmount[track] +=amount;
-        emit Stake(msg.sender,amount);
-        return true;
-    }
+        // Check if the voteData is not already in the array
+        bool alreadyVoted = false;
+        for (uint256 i = 0; i < votedTeam[msg.sender][_track].length; i++) {
+            if (keccak256(bytes(votedTeam[msg.sender][_track][i])) == keccak256(bytes(_team))) {
+                alreadyVoted = true;
+                break;
+            }
+        }
 
-    function vote(string memory _track,string memory _team) external returns(bool){
-        require(ENDTIME-block.timestamp>STOPTIME,"vote time is over");
-        require(stakeNum[msg.sender][_track] >0,"please stake first");
-        require(bytes(votedTeam[msg.sender][_track]).length == 0, "you have already voted");
-        // require(_isTeam(_team),"team is not exist");
-        votedTeam[msg.sender][_track] = _team;
-        votes[_track][_team]++;
+        // If not already voted, add the voteData
+        if (!alreadyVoted) {
+            votedTeam[msg.sender][_track].push(_team);
+            votes[_track][_team] += amount;
+        }
+
+        emit Stake(msg.sender,amount);
         emit Vote(_team,_track,msg.sender);
         return true;
     }
@@ -98,7 +103,9 @@ contract hackthonProject is Ihackthon{
         winningAmount = 0;
         trackAmount = getTrackAmount(track);
         stakeAmount = stakeNum[user][track];
-        winningAmount = stakeAmount/ trackAmount;
+        winningAmount = stakeAmount / trackAmount;
+        question.totalYesAmount *
+                    question.noCount[i].amount) / question.totalNoAmount;
         return winningAmount
     }
 
