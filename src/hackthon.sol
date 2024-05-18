@@ -8,9 +8,10 @@ contract hackthonProject is Ihackthon{
     // string[] public winner;
     address[] public adminList;
     mapping (string =>string) public winner;
-    mapping (string =>mapping(string=> uint256)) public stake;
     mapping (string =>mapping(string=> uint256)) votes;
     mapping (address =>mapping(string=> uint256)) stakeNum;
+    mapping (string =>uint256) trackAmount;
+    mapping (address =>mapping(string=> uint256)) votedTrack;
     mapping (address => mapping(string=>string)) votedTeam;
     uint public ENDTIME;
     uint public STOPTIME;
@@ -56,6 +57,7 @@ contract hackthonProject is Ihackthon{
         require(IERC20(usdt).balanceOf(msg.sender)>0);
         IERC20(usdt).transferFrom(msg.sender,address(this),amount);
         stakeNum[msg.sender][track] +=amount;
+        trackAmount[track] +=amount;
         emit Stake(msg.sender,amount);
         return true;
     }
@@ -92,6 +94,7 @@ contract hackthonProject is Ihackthon{
     function settleWinnerPrice(string memory track) external view returns(bool){
         require(block.timestamp>ENDTIME);
         require(isStaked(track,msg.sender),"please stake first");
+        
 
         
     }
