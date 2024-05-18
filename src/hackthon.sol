@@ -5,9 +5,10 @@ import "src/Ihackthon.sol";
 contract hackthonProject is Ihackthon{
     string[] public team;
     string[] public tracks;
-    string[] public winner;
+    // string[] public winner;
     address[] public adminList;
-
+    mapping (string =>string) public winner;
+    mapping (string =>mapping(string=> uint256)) public stake;
     mapping (string =>mapping(string=> uint256)) votes;
     mapping (address =>mapping(string=> uint256)) stakeNum;
     mapping (address => mapping(string=>string)) votedTeam;
@@ -70,17 +71,23 @@ contract hackthonProject is Ihackthon{
         return true;
     }
 
-    function setHackthonResult(string[] memory _winner) external returns(bool){
+    function setHackthonResult(string memory track,string memory _winner) external returns(bool){
         require(block.timestamp>ENDTIME);
-        winner = _winner;
+        winner[track] = _winner;
         return true;
     }
 
-    function claim () external returns(bool){
+    function claim (string memory track) external returns(bool){
         require(block.timestamp>ENDTIME);
+        require(isStaked(track,msg.sender),"please stake first");
+        require(bytes(votedTeam[msg.sender][track]).length > 0, "you have not voted");
+        require(votedTeam[msg.sender][track] == winner[0],"you are not the winner");
+        uint256 amount = stakeNum[msg.sender][track];
+        stakeNum[msg.sender][track] = 0;
+
+
         
     }
-
 
     function settleWinnerPrice(string memory track) external view returns(bool){
         require(block.timestamp>ENDTIME);
