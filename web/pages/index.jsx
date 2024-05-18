@@ -2,12 +2,12 @@
  * @Author: lxj 1851816672@qq.com
  * @Date: 2024-05-18 03:30:59
  * @LastEditors: lxj 1851816672@qq.com
- * @LastEditTime: 2024-05-18 16:11:26
+ * @LastEditTime: 2024-05-18 17:52:54
  * @FilePath: /DelphiX/web/pages/index.jsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
 import React from 'react'
-import { Layout, Menu, Card, Row, Col, Typography, Button, InputNumber } from 'antd'
+import { Layout, Menu, Card, Row, Col, Typography, Button, InputNumber, Modal } from 'antd'
 import { useEffect, useState } from 'react'
 // import logo from "@/public/logo.png"
 import banner from 'public/banner.png'
@@ -20,9 +20,9 @@ const ETHBeijing = () => {
   const [currentTab, setCurrentTab] = useState(1)
   const [competitionEndTime, setCompetitionEndTime] = useState('48:32:20')
   const [betsEndsTime, setBetsEndsTime] = useState('24:15:13')
-  const [poolData, setPoolData] = useState(2301111)
+  const [poolData, setPoolData] = useState(230)
   const [adressAmount, setAdressAmount] = useState(321)
-  const [poolAmount, setPoolAmount] = useState(321)
+  const [OpenModel, setOpenModel] = useState(false)
 
 
   const tabs = [{ index: 1, name: 'ETH Beijing' }, { index: 2, name: 'Upcoming Games' }]
@@ -70,6 +70,15 @@ const ETHBeijing = () => {
 
   }
 
+  const checkbet = () => {
+    setOpenModel(true)
+  }
+
+  const handleCancel = () => {
+    setOpenModel(false)
+  }
+
+  const claim = () => { }
   return (
     <Layout style={{ backgroundColor: '#fff', borderRadius: '10px' }}>
       <Header>
@@ -97,17 +106,24 @@ const ETHBeijing = () => {
                 DelphiX is to help users who focus on ETH Beijing with interest to participate betting "Who Is Winner". ETH Beijing Winner can get the grant of the 20% pool and bets users can get 80% if they bet the right result.
               </Paragraph>
             </section>
-            <section style={{ marginBottom: '40px' }}>
-              <Title level={2}>Statistics</Title>
-              <Paragraph>Competition Ends in {competitionEndTime}</Paragraph>
-              <Paragraph>Place Bets Ends in {betsEndsTime}</Paragraph>
-              <Paragraph>
-                Pool <Text strong>{poolData} USDT</Text>
-              </Paragraph>
-              <Paragraph>
-                Betting <Text strong>{adressAmount} addresses</Text>
-              </Paragraph>
-            </section>
+            <div style={{ display: 'flex' }}>
+              <section style={{ marginBottom: '40px' }}>
+                <Title level={2}>Statistics</Title>
+                <Paragraph>Competition Ends in {competitionEndTime}</Paragraph>
+                <Paragraph>Place Bets Ends in {betsEndsTime}</Paragraph>
+                <Paragraph>
+                  Pool <Text strong>{poolData} USDT</Text>
+                </Paragraph>
+                <Paragraph>
+                  Betting <Text strong>{adressAmount} addresses</Text>
+                </Paragraph>
+              </section>
+              <section style={{ marginBottom: '40px', marginLeft: '400px' }}>
+                <Title level={2}>Winner</Title>
+                <Paragraph></Paragraph>
+                <div onClick={checkbet}>Check My Bet</div>
+              </section>
+            </div>
             <section>
               <Title level={2}>Teams</Title>
               <Row gutter={16}>
@@ -123,7 +139,7 @@ const ETHBeijing = () => {
                         <Paragraph> {item.poolAmount} USDT</Paragraph>
                       </div>
                       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <div style={{ display: 'flex' }}>
+                        <div style={{ display: 'flex', marginRight: '20px' }}>
                           <Button onClick={() => onDecrease(item.id, item.inputValue)}>-</Button>
                           <InputNumber
                             min={0}
@@ -133,7 +149,7 @@ const ETHBeijing = () => {
                           />
                           <Button onClick={() => onIncrease(item.id, item.inputValue)}>+</Button>
                         </div>
-                        <Button>Bets</Button>
+                        <Button onClick={bet}>Bets</Button>
                       </div>
                     </Card>
                   </Col>
@@ -143,9 +159,27 @@ const ETHBeijing = () => {
             </section>
           </div>
         </div> : 'Coming soon!'}
-
       </Content>
+      <Modal
+        open={OpenModel}
+        title=""
+        onCancel={handleCancel}
+        footer={[
+
+        ]}
+      >
+        <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
+          <Title level={2}>My Betting Result</Title>
+          <Paragraph>Unfortunately, you have not won the forecast</Paragraph>
+          <Paragraph>
+            <Text strong>Claim to get your reward 1000 USDT</Text>
+          </Paragraph>
+          <div onClick={claim} style={{ width: '100%', borderRadius: '25px', height: '32px', backgroundColor: 'yellow', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '10px', cursor: 'pointer' }}>Claim</div>
+          <div onClick={handleCancel} style={{ width: '100%', borderRadius: '25px', height: '32px', backgroundColor: '#f0f2f5', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>Close</div>
+        </div>
+      </Modal>
     </Layout>
+
   )
 }
 

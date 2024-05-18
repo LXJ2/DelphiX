@@ -129,17 +129,13 @@
 }
 
 .ant-modal-title {
-  background-color: #222222 !important;
-  color: #ffffff !important;
+  background-color: #ffffff !important;
+  color: #222 !important;
 }
 
 .ant-modal-content {
-  background-color: #222222 !important;
-  color: #ffffff !important;
-}
-
-.ant-modal-close {
-  color: #ffffff !important;
+  background-color: #ffffff !important;
+  color: #222 !important;
 }
 
 .priceNumber {
