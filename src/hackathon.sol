@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
 import "lib/openzeppelin-contracts/contracts/token/ERC20/IERC20.sol";
-import "src/Ihackthon.sol";
+import "src/Ihackathon.sol";
 import {Test, console} from "forge-std/Test.sol";
 
-contract hackthonProject is Ihackthon{
+contract hackathonProject is Ihackathon{
     string[] public team;
     string[] public tracks;
     // string[] public winner;
@@ -80,7 +80,7 @@ contract hackthonProject is Ihackthon{
         return true;
     }
 
-    function setHackthonResult(string memory track,string memory _winner) external returns(bool){
+    function setHackathonResult(string memory track,string memory _winner) external returns(bool){
         require(block.timestamp>ENDTIME);
         winner[track] = _winner;
         return true;
