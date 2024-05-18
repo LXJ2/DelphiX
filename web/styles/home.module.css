@@ -9,7 +9,6 @@
     background: black;
     font-weight: bold;
     font-size: 20px;
-    font-family: PressStart2P;
     /* Light gray background color */
 }
 
@@ -28,7 +27,7 @@
 
 .title {
     margin: 0px;
-    font-family: PressStart2P;
+    font-family: ;
     line-height: 1.5;
     font-weight: 700;
     font-size: 20px;
@@ -36,7 +35,6 @@
 
 .apply {
     text-align: center;
-    font-family: PressStart2P;
     line-height: 1.5;
     font-weight: 700;
     font-size: 16px;
@@ -54,7 +52,7 @@
 }
 
 .inputTitle {
-    font-family: PressStart2P;
+
     line-height: 1.5;
     font-weight: 500;
     font-size: 15px;
@@ -62,7 +60,7 @@
 }
 
 .inputFoot {
-    font-family: PressStart2P;
+
     line-height: 1.5;
     font-weight: 500;
     font-size: 13px;
@@ -103,7 +101,7 @@
 }
 
 .rightText {
-    font-family: PressStart2P;
+
     line-height: 1.5;
     font-size: 15px;
     font-weight: 700;
@@ -132,7 +130,7 @@
 }
 
 .footText {
-    font-family: PressStart2P;
+
     font-weight: 500;
     font-size: 16px;
 }
@@ -160,7 +158,6 @@
 .xbody {
     margin-top: 40px;
     font-size: 14px;
-    font-family: PressStart2P;
     font-weight: 400;
     color: #FFFFFF;
 }
@@ -235,7 +232,7 @@
     display: flex;
     justify-content: space-between;
     font-size: 12px;
-    font-family: PressStart2P;
+
     font-weight: 400;
     color: #FFFFFF;
 }

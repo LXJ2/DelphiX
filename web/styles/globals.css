@@ -152,7 +152,6 @@
   background-color: #FFFFFF;
   border-radius: 60px;
   font-size: 14px;
-  /*font-family: PressStart2P;*/
   font-weight: 400;
   /*color: #000000;*/
   cursor: pointer;
@@ -160,11 +159,6 @@
 
 .confirmBtn:hover {
   background-color: #DDDDDD;
-}
-
-@font-face {
-  font-family: 'PressStart2P';
-  /*src: url('./PressStart2P.ttf')*/
 }
 
 .ant-slider-rail {
