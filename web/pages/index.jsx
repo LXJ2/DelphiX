@@ -2,16 +2,18 @@
  * @Author: lxj 1851816672@qq.com
  * @Date: 2024-05-18 03:30:59
  * @LastEditors: lxj 1851816672@qq.com
- * @LastEditTime: 2024-05-18 19:00:39
+ * @LastEditTime: 2024-05-18 20:22:45
  * @FilePath: /DelphiX/web/pages/index.jsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
 import React from 'react'
 import { Layout, Menu, Card, Row, Col, Typography, Button, InputNumber, Modal } from 'antd'
 import { useEffect, useState } from 'react'
-// import logo from "@/public/logo.png"
 import banner from 'public/banner.png'
 import Image from "next/image"
+import hkABI from 'Abi/hackathon.json'
+import tokenABT from 'Abi/token.json'
+import { useContracts } from '@/hooks/useContract';
 
 const { Header, Content } = Layout
 const { Title, Paragraph, Text } = Typography
@@ -26,6 +28,8 @@ const ETHBeijing = () => {
   const [adressAmount, setAdressAmount] = useState(321)
   const [OpenModel, setOpenModel] = useState(false)
 
+  const hkContract = useContracts('0x859Fa33989ae95C367E971e098848862060cbb9F', hkABI)
+  const tokenContract = useContracts('0xb59Bd469951283Ed5A36CFC0650A9Ae1b28Db557', tokenABT)
 
   const tabs = [{ index: 1, name: 'ETH Beijing' }, { index: 2, name: 'Upcoming Games' }]
   const competitionTabs = [{ index: 1, name: 'Public Goods' }, { index: 2, name: 'Innovative Laver2 Dapp' }, { index: 3, name: 'Open Research' }, { index: 4, name: 'Scroll' }]
@@ -128,7 +132,7 @@ const ETHBeijing = () => {
               <section style={{ marginBottom: '40px', marginLeft: '400px' }}>
                 <Title level={2}>Winner</Title>
                 <Paragraph></Paragraph>
-                <div onClick={checkbet}>Check My Bet</div>
+                <div onClick={checkbet} style={{ width: '100%', borderRadius: '25px', height: '32px', backgroundColor: '#f0f2f5', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>Check My Bet</div>
               </section>
             </div>
             <section>
