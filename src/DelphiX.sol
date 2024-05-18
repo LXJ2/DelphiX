@@ -10,7 +10,7 @@ contract DelphiX {
 
     constructor(address _usdtToken) {
         owner = msg.sender;
-        usdtToken = _usdt;
+        usdtToken = _usdtToken;
     }
 
     mapping(uint256 => Questions) public questions;
