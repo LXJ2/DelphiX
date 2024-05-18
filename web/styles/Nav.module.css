@@ -4,9 +4,10 @@
   align-items: center;
   position: sticky;
   top: 0;
-  background: #FFFFFF;
   /* 深色背景 */
   z-index: 2;
+  background: #c9dcf6;
+  padding: 10px;
 }
 
 .list {
@@ -16,10 +17,8 @@
 }
 
 .tittle {
-  font-family: PressStart2P;
   font-size: 1.25rem;
   display: flex;
-  align-items: center;
   gap: 10px;
   color: #414244;
 }
@@ -29,7 +28,6 @@
   margin: 0 5px;
   cursor: pointer;
   font-size: 16px;
-  font-family: PressStart2P;
   font-weight: 500;
   color: #97969c;
   transition: all .2s;

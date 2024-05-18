@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    --background: #FFFFFF;
+    --background: black;
     --cardBg: '#414847';
     --buttonBg: '#4a4343';
     --foreground: 222.2 47.4% 11.2%;
@@ -82,12 +82,24 @@
   body {
     @apply text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
-    background: #FFFFFF;
+    /*background: black;*/
+    background: linear-gradient(30deg, #eef6ff, #9cc1f1) no-repeat fixed;
+
     padding: 20px 80px;
     /* 深色背景 */
   }
 }
 
+.ant-progress-text {
+  color: #f38219 !important;
+  width: 60px !important;
+  margin-bottom: -14px;
+  margin-right: 8px;
+}
+
+.ant-progress-line {
+  display: flex !important;
+}
 
 .flx-center {
   display: flex;
@@ -95,11 +107,66 @@
   justify-content: center;
 }
 
-.ant-layout-header {
-  background: #FFFFFF;
+
+.ant-input:hover {
+  border: none !important;
+}
+
+.ant-input:focus {
+  box-shadow: none !important;
+}
+
+
+.ant-input::-webkit-inner-spin-button,
+.ant-input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.ant-input:hover::-webkit-inner-spin-button,
+.ant-input:hover::-webkit-outer-spin-button {
+  display: none;
+}
+
+.ant-modal-title {
+  background-color: #222222 !important;
+  color: #ffffff !important;
+}
+
+.ant-modal-content {
+  background-color: #222222 !important;
+  color: #ffffff !important;
+}
+
+.ant-modal-close {
+  color: #ffffff !important;
+}
+
+.priceNumber {
+  margin: 0 4px;
+  color: #FF661F;
+}
+
+.confirmBtn {
+  padding: 14px 80px;
+  background-color: #FFFFFF;
+  border-radius: 60px;
+  font-size: 14px;
+  /*font-family: PressStart2P;*/
+  font-weight: 400;
+  /*color: #000000;*/
+  cursor: pointer;
+}
+
+.confirmBtn:hover {
+  background-color: #DDDDDD;
 }
 
 @font-face {
   font-family: 'PressStart2P';
-  src: url('./PressStart2P.ttf')
+  /*src: url('./PressStart2P.ttf')*/
+}
+
+.ant-slider-rail {
+  /*background-color: # !important;*/
 }
