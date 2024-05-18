@@ -2,7 +2,7 @@
  * @Author: lxj 1851816672@qq.com
  * @Date: 2024-05-18 03:30:59
  * @LastEditors: lxj 1851816672@qq.com
- * @LastEditTime: 2024-05-18 17:52:54
+ * @LastEditTime: 2024-05-18 19:00:39
  * @FilePath: /DelphiX/web/pages/index.jsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -18,6 +18,8 @@ const { Title, Paragraph, Text } = Typography
 
 const ETHBeijing = () => {
   const [currentTab, setCurrentTab] = useState(1)
+  const [currentCompetitionTab, setCurrentCompetitionTab] = useState(1)
+
   const [competitionEndTime, setCompetitionEndTime] = useState('48:32:20')
   const [betsEndsTime, setBetsEndsTime] = useState('24:15:13')
   const [poolData, setPoolData] = useState(230)
@@ -26,6 +28,8 @@ const ETHBeijing = () => {
 
 
   const tabs = [{ index: 1, name: 'ETH Beijing' }, { index: 2, name: 'Upcoming Games' }]
+  const competitionTabs = [{ index: 1, name: 'Public Goods' }, { index: 2, name: 'Innovative Laver2 Dapp' }, { index: 3, name: 'Open Research' }, { index: 4, name: 'Scroll' }]
+
   const [teams, setTeams] = useState([
     {
       id: 1, poolAmount: 0, inputValue: 0, projectName: 'DelphiX', intro: `DelphiX is a web3 forecast market for developers competition focusing on hackathon as well as coder events.
@@ -46,6 +50,9 @@ const ETHBeijing = () => {
 
   const tabClick = (data) => {
     setCurrentTab(data.index)
+  }
+  const competitionTabsClick = (data) => {
+    setCurrentCompetitionTab(data.index)
   }
 
   const onDecrease = (id, value) => {
@@ -126,6 +133,13 @@ const ETHBeijing = () => {
             </div>
             <section>
               <Title level={2}>Teams</Title>
+              <Menu style={{ fontSize: '16px', background: '#f0f2f5', marginBottom: '20px' }} theme="light" mode="horizontal" defaultSelectedKeys={[1]}>
+                {competitionTabs.map(item => {
+                  return <Menu.Item key={item.index} onClick={() => {
+                    competitionTabsClick(item)
+                  }}>{item.name}</Menu.Item>
+                })}
+              </Menu>
               <Row gutter={16}>
                 {teams.map(item => {
                   return <Col span={8} key={item.id}>
