@@ -35,7 +35,7 @@ contract hackthonProject is Ihackthon{
         factory = _factory;
     }
 
-    function init(string[] memory _tracks,string[] memory _team,uint _ENDTIME,uint _STOPTIME,address _usdt,address[] _adminList)external onlyFactory{
+    function init(string[] memory _tracks,string[] memory _team,uint _ENDTIME,uint _STOPTIME,address _usdt,address[] memory _adminList)external onlyFactory{
         require(_ENDTIME>_STOPTIME);
         require(tracks.length>0);
         require(_team.length>0);
@@ -49,41 +49,24 @@ contract hackthonProject is Ihackthon{
         usdt = _usdt;
     }
 
-    function stake(uint256 amount) external returns(bool){
+    function stake(string memory track,uint256 amount) external returns(bool){
         require(ENDTIME-block.timestamp>STOPTIME);
         require(IERC20(usdt).allowance(msg.sender,address(this))>0);
         require(IERC20(usdt).balanceOf(msg.sender)>0);
         IERC20(usdt).transferFrom(msg.sender,address(this),amount);
-        stakeNum[msg.sender] +=amount;
+        stakeNum[msg.sender][track] +=amount;
         emit Stake(msg.sender,amount);
         return true;
     }
 
     function vote(string memory _track,string memory _team) external returns(bool){
         require(ENDTIME-block.timestamp>STOPTIME,"vote time is over");
-        require(stakeNum[msg.sender] >0,"please stake first");
-        require(votedTeam[msg.sender] == "", "you have already voted");
-        require(_isTeam(_team),"team is not exist");
-        votedTeam[msg.sender] = _team;
-        votes[team]++;
-        emit Vote(msg.sender,team);
-        return true;
-    }
-    function _isTeam(string memory _team) internal view returns(bool){
-        for(uint i=0;i<team.length;i++){
-            if(team[i]==_team){
-                return false;
-            }
-        }
-        return true;
-    }
-    
-    function isTrack(string memory _track) external view returns(bool){
-        for(uint i=0;i<tracks.length;i++){
-            if(tracks[i]==_track){
-                return false;
-            }
-        }
+        require(stakeNum[msg.sender][_track] >0,"please stake first");
+        require(bytes(votedTeam[msg.sender][_track]).length == 0, "you have already voted");
+        // require(_isTeam(_team),"team is not exist");
+        votedTeam[msg.sender][_track] = _team;
+        votes[_track][_team]++;
+        emit Vote(_team,_track,msg.sender);
         return true;
     }
 
@@ -101,36 +84,21 @@ contract hackthonProject is Ihackthon{
 
     function settleWinnerPrice(string memory track) external view returns(bool){
         require(block.timestamp>ENDTIME);
-        require(isStaked(msg.sender),"please stake first");
-
+        require(isStaked(track,msg.sender),"please stake first");
 
         
     }
 
-    function isStaked() external view returns(bool) {
-        return stakeNum[msg.sender] > 0;
+    function isStaked(string memory track,address user) internal view returns(bool) {
+        return stakeNum[user][track] > 0;
     }
-
-
-    function getVotes(string memory team) external view returns(uint256){
-        return votes[team];
-    }
-
-    function getStakeNum(address user) external view returns(uint256){
-        return stakeNum[user];
-    }
-
-    function getTeam() external view returns(string[] memory){
-        return team;
-    }
-
 
     function getWinner() external view returns(string[] memory){
         return winner;
     }
 
-    function getVotedTeam(address user) external view returns(string memory){
-        return votedTeam[user];
+    function getVotedTeam(string memory track,address user) external view returns(string memory){
+        return votedTeam[user][track];
     }
 
     function getTracks() external view returns(string[] memory){
