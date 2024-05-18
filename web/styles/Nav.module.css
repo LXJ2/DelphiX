@@ -21,6 +21,7 @@
   display: flex;
   gap: 10px;
   color: #414244;
+  align-items: center;
 }
 
 

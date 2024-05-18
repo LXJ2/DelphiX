@@ -2,7 +2,7 @@
  * @Author: lxj 1851816672@qq.com
  * @Date: 2024-05-18 03:30:59
  * @LastEditors: lxj 1851816672@qq.com
- * @LastEditTime: 2024-05-18 11:43:12
+ * @LastEditTime: 2024-05-18 11:54:42
  * @FilePath: /DelphiX/web/pages/index.jsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -14,7 +14,7 @@ const { Header, Content } = Layout;
 const { Title, Paragraph, Text } = Typography;
 
 const ETHBeijing = () => {
-  const [currentTab, setCurrentTab] = useState(0)
+  const [currentTab, setCurrentTab] = useState(1)
   const [competitionEndTime, setCompetitionEndTime] = useState('48:32:20')
   const [betsEndsTime, setBetsEndsTime] = useState('24:15:13')
   const [poolData, setPoolData] = useState(2301111)
