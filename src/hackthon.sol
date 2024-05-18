@@ -86,7 +86,7 @@ contract hackthonProject is Ihackthon{
         require(keccak256(bytes(votedTeam[msg.sender][track])) == keccak256(bytes(winner[track])), "you are not the winner");
         uint256 amount = settleWinnerPrice(track,msg.sender);
         address payable _address = payable(msg.sender);
-        IERC20(usdtToken).transfer(_address, amount);       
+        IERC20(usdt).transfer(_address, amount);       
         stakeNum[msg.sender][track] = 0;
         
     }
