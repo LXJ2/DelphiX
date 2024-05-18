@@ -2,7 +2,7 @@
  * @Author: lxj 1851816672@qq.com
  * @Date: 2024-05-18 03:30:59
  * @LastEditors: lxj 1851816672@qq.com
- * @LastEditTime: 2024-05-18 11:05:32
+ * @LastEditTime: 2024-05-18 11:09:45
  * @FilePath: /DelphiX/web/pages/index.jsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -77,10 +77,8 @@ const ETHBeijing = () => {
                 <Col span={6}>
                   <Card title="DelphiX" bordered={false}>
                     <Paragraph>Intro</Paragraph>
-                    <Paragraph>DelphiX 是一个基于区块链技术的黑客松赛事结果预测下注平台。
-                      用户可以通过该平台预测黑客松赛事的冠军，并根据赔率获得奖励。
-                      DelphiX 旨在通过提供基于区块链的赛事结果预测下注服务，增强黑客松赛事的娱乐性和观赏性，
-                      同时为参与者提供一个有趣且具有挑战性的机会，展示他们对赛事结果的洞察力。
+                    <Paragraph>DelphiX is a web3 forecast market for developers competition focusing on hackathon as well as coder events.
+                      It provides on chain staking to win the betting pool for layer 1 & layer 2 completition. Now it supports ETH Beijing as season 1.
                     </Paragraph>
                     <Paragraph>Bets: 310</Paragraph>
                     <div style={{ display: 'flex' }}>
