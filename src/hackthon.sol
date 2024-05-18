@@ -83,7 +83,7 @@ contract hackthonProject is Ihackthon{
         require(block.timestamp>ENDTIME);
         require(isStaked(track,msg.sender),"please stake first");
         require(bytes(votedTeam[msg.sender][track]).length > 0, "you have not voted");
-        require(votedTeam[msg.sender][track] == winner[0],"you are not the winner");
+        require(keccak256(bytes(votedTeam[msg.sender][track])) == keccak256(bytes(winner[track])), "you are not the winner");
         uint256 amount = stakeNum[msg.sender][track];
         stakeNum[msg.sender][track] = 0;
 
@@ -94,7 +94,7 @@ contract hackthonProject is Ihackthon{
     function settleWinnerPrice(string memory track) external view returns(bool){
         require(block.timestamp>ENDTIME);
         require(isStaked(track,msg.sender),"please stake first");
-        
+
 
         
     }
@@ -103,8 +103,8 @@ contract hackthonProject is Ihackthon{
         return stakeNum[user][track] > 0;
     }
 
-    function getWinner() external view returns(string[] memory){
-        return winner;
+    function getWinner(string memory track) external view returns(string memory){
+        return winner[track];
     }
 
     function getVotedTeam(string memory track,address user) external view returns(string memory){
