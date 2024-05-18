@@ -64,3 +64,12 @@ $ forge --help
 $ anvil --help
 $ cast --help
 ```
+## Contract Address
+- USDT
+```
+0xb59Bd469951283Ed5A36CFC0650A9Ae1b28Db557
+```
+- Hackathon
+```
+0x859Fa33989ae95C367E971e098848862060cbb9F
+```
