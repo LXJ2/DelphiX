@@ -103,9 +103,9 @@ contract hackthonProject is Ihackthon{
         winningAmount = 0;
         trackAmount = getTrackAmount(track);
         stakeAmount = stakeNum[user][track];
-        winningAmount = stakeAmount / trackAmount;
-        question.totalYesAmount *
-                    question.noCount[i].amount) / question.totalNoAmount;
+        voteAmount = votes[_track][_team];
+        winningAmount = stakeAmount / voteAmount * trackAmount;
+
         return winningAmount
     }
 
