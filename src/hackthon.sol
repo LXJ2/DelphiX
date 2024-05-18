@@ -51,7 +51,7 @@ contract hackthonProject is Ihackthon{
         usdt = _usdt;
     }
 
-    function stake(string memory track,uint256 amount) external returns(bool){
+    function stake(string memory track,uint256 amount, string memory _team) external returns(bool){
         require(ENDTIME-block.timestamp>STOPTIME);
         require(IERC20(usdt).allowance(msg.sender,address(this))>0);
         require(IERC20(usdt).balanceOf(msg.sender)>0);
@@ -60,8 +60,8 @@ contract hackthonProject is Ihackthon{
         trackAmount[track] +=amount;
         // Check if the voteData is not already in the array
         bool alreadyVoted = false;
-        for (uint256 i = 0; i < votedTeam[msg.sender][_track].length; i++) {
-            if (keccak256(bytes(votedTeam[msg.sender][_track][i])) == keccak256(bytes(_team))) {
+        for (uint256 i = 0; i < votedTeam[msg.sender][track].length; i++) {
+            if (keccak256(bytes(votedTeam[msg.sender][track][i])) == keccak256(bytes(_team))) {
                 alreadyVoted = true;
                 break;
             }
@@ -69,12 +69,12 @@ contract hackthonProject is Ihackthon{
 
         // If not already voted, add the voteData
         if (!alreadyVoted) {
-            votedTeam[msg.sender][_track].push(_team);
-            votes[_track][_team] += amount;
+            votedTeam[msg.sender][track].push(_team);
+            votes[track][_team] += amount;
         }
 
         emit Stake(msg.sender,amount);
-        emit Vote(_team,_track,msg.sender);
+        emit Vote(_team,track,msg.sender);
         return true;
     }
 
@@ -84,27 +84,37 @@ contract hackthonProject is Ihackthon{
         return true;
     }
 
-    function claim (string memory track) external returns(bool){
+    function claim (string memory track) external{
         require(block.timestamp>ENDTIME);
         require(isStaked(track,msg.sender),"please stake first");
-        require(bytes(votedTeam[msg.sender][track]).length > 0, "you have not voted");
-        require(keccak256(bytes(votedTeam[msg.sender][track])) == keccak256(bytes(winner[track])), "you are not the winner");
-        uint256 amount = settleWinnerPrice(track,msg.sender);
+        require(votedTeam[msg.sender][track].length > 0, "you have not voted");
+
+        uint256 amount = settleWinnerPrice(track, msg.sender);
         address payable _address = payable(msg.sender);
         stakeNum[msg.sender][track] = 0;
         IERC20(usdt).transfer(_address, amount);       
         
     }
 
-    function settleWinnerPrice(string memory track,address user) external view returns(uint256){
-        require(block.timestamp>ENDTIME);
-        require(isStaked(track,msg.sender),"please stake first");
-        require(keccak256(bytes(votedTeam[msg.sender][track])) == keccak256(bytes(winner[track])), "you are not the winner");
-        winningAmount = 0;
-        trackAmount = getTrackAmount(track);
-        stakeAmount = stakeNum[user][track];
-        voteAmount = votes[_track][_team];
-        winningAmount = stakeAmount / voteAmount * trackAmount;
+    function settleWinnerPrice(string memory track, address user) public view returns (uint256) {
+        require(block.timestamp > ENDTIME, "Voting period has not ended");
+        require(isStaked(track, msg.sender), "Please stake first");
+
+        bool isWinner = false;
+        for (uint256 i = 0; i < votedTeam[msg.sender][track].length; i++) {
+            if (keccak256(bytes(votedTeam[msg.sender][track][i])) == keccak256(bytes(winner[track]))) {
+                isWinner = true;
+                break;
+            }
+        }
+        require(isWinner, "you are not the winner");
+
+        uint256 _trackAmount = getTrackAmount(track);
+        uint256 _stakeAmount = stakeNum[user][track];
+        uint256 _voteAmount = votes[track][winner[track]]; // Assuming _track and _team are not defined elsewhere
+
+        // Calculate the winning amount
+        uint256 winningAmount = (_stakeAmount * _trackAmount) / _voteAmount;
 
         return winningAmount;
     }
@@ -117,7 +127,7 @@ contract hackthonProject is Ihackthon{
         return winner[track];
     }
 
-    function getVotedTeam(string memory track,address user) external view returns(string memory){
+    function getVotedTeam(string memory track,address user) external view returns(string[] memory){
         return votedTeam[user][track];
     }
 
@@ -125,7 +135,7 @@ contract hackthonProject is Ihackthon{
         return tracks;
     }
 
-    function getTrackAmount(string memory track) external view returns(uint256){
+    function getTrackAmount(string memory track) public view returns(uint256){
         return trackAmount[track];
     }
 
