@@ -2,7 +2,7 @@
  * @Author: lxj 1851816672@qq.com
  * @Date: 2024-05-18 03:30:59
  * @LastEditors: lxj 1851816672@qq.com
- * @LastEditTime: 2024-05-18 11:54:42
+ * @LastEditTime: 2024-05-18 12:01:12
  * @FilePath: /DelphiX/web/pages/index.jsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -20,9 +20,11 @@ const ETHBeijing = () => {
   const [poolData, setPoolData] = useState(2301111)
   const [adressAmount, setAdressAmount] = useState(321)
   const [poolAmount, setPoolAmount] = useState(321)
-
-
   const tabs = [{ index: 1, name: 'ETH Beijing' }, { index: 2, name: 'Upcoming Games' }]
+  const teams = [
+    { index: 0, projectName: 'DelphiX', Intro: 'DelphiX is a web3 forecast market for developers competition focusing on hackathon as well as coder events.It provides on chain staking to win the betting pool for layer 1 & layer 2 completition. Now it supports ETH Beijing as season 1.' }
+  ]
+
 
   const tabClick = (data) => {
     setCurrentTab(data.index)
@@ -77,33 +79,36 @@ const ETHBeijing = () => {
             <section>
               <Title level={2}>Teams</Title>
               <Row gutter={16}>
-                <Col span={8}>
-                  <Card title="DelphiX" bordered={false}>
-                    <Paragraph>Intro</Paragraph>
-                    <Paragraph>DelphiX is a web3 forecast market for developers competition focusing on hackathon as well as coder events.
-                      It provides on chain staking to win the betting pool for layer 1 & layer 2 completition. Now it supports ETH Beijing as season 1.
-                    </Paragraph>
-                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                      <Paragraph> Pool</Paragraph>
-                      <Paragraph> {poolAmount} USDT</Paragraph>
-                    </div>
-
-                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                      <div style={{ display: 'flex' }}>
-                        <Button onClick={onDecrease}>-</Button>
-                        <InputNumber
-                          min={0}
-                          value={value}
-                          addonAfter="USDT"
-                          onChange={setValue}
-                        />
-                        <Button onClick={onIncrease} >+</Button>
+                {teams.map(item => {
+                  return <Col span={8}>
+                    <Card title={item.projectName} bordered={false}>
+                      <Paragraph>Intro</Paragraph>
+                      <Paragraph>
+                        {item.Intro}
+                      </Paragraph>
+                      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <Paragraph> Pool</Paragraph>
+                        <Paragraph> {poolAmount} USDT</Paragraph>
                       </div>
-                      <Button>Bets</Button>
-                    </div>
 
-                  </Card>
-                </Col>
+                      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <div style={{ display: 'flex' }}>
+                          <Button onClick={onDecrease}>-</Button>
+                          <InputNumber
+                            min={0}
+                            value={value}
+                            addonAfter="USDT"
+                            onChange={setValue}
+                          />
+                          <Button onClick={onIncrease} >+</Button>
+                        </div>
+                        <Button>Bets</Button>
+                      </div>
+
+                    </Card>
+                  </Col>
+                })}
+
               </Row>
             </section>
           </div>
