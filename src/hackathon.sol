@@ -40,10 +40,10 @@ contract HackathonProject is Ihackathon{
     }
 
     function init(string[] memory _tracks,string[] memory _team,uint _ENDTIME,uint _STOPTIME,address _usdt,address[] memory _adminList)external onlyFactory{
-        // require(_ENDTIME>_STOPTIME);
-        // require(tracks.length>0);
-        // require(_team.length>0);
-        // require(_usdt!=address(0));
+        require(_ENDTIME>_STOPTIME);
+        require(tracks.length>0);
+        require(_team.length>0);
+        require(_usdt!=address(0));
 
         adminList = _adminList;
         tracks = _tracks;
