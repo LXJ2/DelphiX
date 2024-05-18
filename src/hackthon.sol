@@ -94,8 +94,8 @@ contract hackthonProject is Ihackthon{
     function settleWinnerPrice(string memory track) external view returns(bool){
         require(block.timestamp>ENDTIME);
         require(isStaked(track,msg.sender),"please stake first");
-
-
+        require(getWinner(track) == getVotedTeam(track, msg.sender)) 
+        
         
     }
 
@@ -113,6 +113,10 @@ contract hackthonProject is Ihackthon{
 
     function getTracks() external view returns(string[] memory){
         return tracks;
+    }
+
+    function getTrackAmount(string memory track) external view returns(uint256){
+        return trackAmount[track];
     }
 
     function getAdminList() external view returns(address[] memory){
