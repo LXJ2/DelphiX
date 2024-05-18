@@ -2,7 +2,6 @@
 pragma solidity ^0.8.13;
 import "lib/openzeppelin-contracts/contracts/token/ERC20/IERC20.sol";
 import "src/Ihackathon.sol";
-import {Test, console} from "forge-std/Test.sol";
 
 contract HackathonProject is Ihackathon{
     string[] public team;

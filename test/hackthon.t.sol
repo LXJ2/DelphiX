@@ -4,11 +4,11 @@ pragma solidity ^0.8.13;
 import {Test, console} from "forge-std/Test.sol";
 import "lib/openzeppelin-contracts/contracts/token/ERC20/IERC20.sol";
 
-import "../src/hackthon.sol";
+import "../src/Hackathon.sol";
 import "../src/Token.sol";
 
-contract HackthonTest is Test {
-    hackthonProject public hackthon;
+contract HackathonTest is Test {
+    HackathonProject public hackathon;
 
     address admin = makeAddr("admin");
     address alice = makeAddr("alice");
@@ -28,8 +28,8 @@ contract HackthonTest is Test {
     function setUp() public {
 
         vm.startPrank(admin);
-        hackthon = new hackthonProject();
-        hackthon.setFactory(factory);
+        hackathon = new HackathonProject();
+        hackathon.setFactory(factory);
         usdx = new Token();
         Token(usdx).mint(alice,20 ether);
         Token(usdx).mint(bob,20 ether);
@@ -53,35 +53,35 @@ contract HackthonTest is Test {
         _adminList = [admin,bob];
 
         vm.startPrank(factory);
-        hackthon.init(_tracks, _team, _ENDTIME, _STOPTIME, address(usdx), _adminList);
+        hackathon.init(_tracks, _team, _ENDTIME, _STOPTIME, address(usdx), _adminList);
         vm.stopPrank();
     }
 
-    function testHackthon() public {
+    function testHackathon() public {
         vm.startPrank(alice);
         {
-            IERC20(usdx).approve(address(hackthon), 10 ether);
-            hackthon.stake("track1","1", 4 ether);
+            IERC20(usdx).approve(address(hackathon), 10 ether);
+            hackathon.stake("track1","1", 4 ether);
         }
         vm.stopPrank();
 
         vm.startPrank(leo);
         {
-            IERC20(usdx).approve(address(hackthon), 10 ether);
-            hackthon.stake("track1","1", 6 ether);
+            IERC20(usdx).approve(address(hackathon), 10 ether);
+            hackathon.stake("track1","1", 6 ether);
         }
         vm.stopPrank();
 
         vm.startPrank(bob);
         {
-            IERC20(usdx).approve(address(hackthon), 20 ether);
-            hackthon.stake("track1","2", 20 ether);
+            IERC20(usdx).approve(address(hackathon), 20 ether);
+            hackathon.stake("track1","2", 20 ether);
         }
         vm.stopPrank();
         vm.startPrank(david);
         {
-            IERC20(usdx).approve(address(hackthon), 10 ether);
-            hackthon.stake("track1","3",10 ether);
+            IERC20(usdx).approve(address(hackathon), 10 ether);
+            hackathon.stake("track1","3",10 ether);
         }
         vm.stopPrank();
 
@@ -89,19 +89,19 @@ contract HackthonTest is Test {
 
         vm.startPrank(admin);
         {
-            hackthon.setHackthonResult("track1","1");
+            hackathon.setHackathonResult("track1","1");
         }
         vm.stopPrank(); 
 
         vm.startPrank(alice);
         {
-            hackthon.claim("track1");
+            hackathon.claim("track1");
         }
         vm.stopPrank();
 
         vm.startPrank(leo);
         {
-            hackthon.claim("track1");
+            hackathon.claim("track1");
         }
         vm.stopPrank();
 
