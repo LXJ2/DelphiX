@@ -84,18 +84,22 @@ contract hackthonProject is Ihackthon{
         require(isStaked(track,msg.sender),"please stake first");
         require(bytes(votedTeam[msg.sender][track]).length > 0, "you have not voted");
         require(keccak256(bytes(votedTeam[msg.sender][track])) == keccak256(bytes(winner[track])), "you are not the winner");
-        uint256 amount = stakeNum[msg.sender][track];
+        uint256 amount = settleWinnerPrice(track,msg.sender);
+        address payable _address = payable(msg.sender);
+        IERC20(usdtToken).transfer(_address, amount);       
         stakeNum[msg.sender][track] = 0;
-
-
         
     }
 
-    function settleWinnerPrice(string memory track) external view returns(bool){
+    function settleWinnerPrice(string memory track,address user) external view returns(uint256){
         require(block.timestamp>ENDTIME);
         require(isStaked(track,msg.sender),"please stake first");
-        require(getWinner(track) == getVotedTeam(track, msg.sender)) 
-        
+        require(keccak256(bytes(votedTeam[msg.sender][track])) == keccak256(bytes(winner[track])), "you are not the winner");
+        winningAmount = 0;
+        trackAmount = getTrackAmount(track);
+        stakeAmount = stakeNum[user][track];
+        winningAmount = trackAmount / stakeAmount;
+        return winningAmount
         
     }
 
