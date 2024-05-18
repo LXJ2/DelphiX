@@ -124,17 +124,7 @@ contract hackthonProject is Ihackthon{
     }
 
 
-
-
-    
-    
-
-    
-
-
-
-
-
-
-
+    function getStakeNum(string memory track, address user) external view returns(uint256){
+        return stakeNum[user][track];
+    }
 }
