@@ -9,7 +9,7 @@
 ## Overview
 
 - Project Name: DelphiX
-- Try it out: [https://XXX](https://XXX)
+- Try it out: [https://delphix.vercel.app/](https://delphix.vercel.app/)
 - Selected Track:
 
     - SCROLL & XXX
@@ -22,8 +22,7 @@
 - [Whitepaper](./design/wiki-en.md)
 - Design:
     1. Network
-        - [Scroll Sepolia Testnet](https://www.ankr.com/rpc/scroll/scroll_sepolia_testnet/)
-        - [XXX](https://XXX)
+        - [Scroll Sepolia Testnet](https://scroll.io/)
 
     2. **Full On-Chain Staking**:
         - Employs blockchain technology to ensure transparency and security in the betting process, with all transaction records being public and immutable.
@@ -58,9 +57,12 @@
     1. Team Leader: Rix
     2. Team Members: [See Contributors](#Contributors)
 
-- Demo Video Link: [https://youtu.be/XXX](https://youtu.be/XXX)
-- [Pitch Deck](https://XXX)
+- Demo Video Link: [coming soon...](https://youtu.be)
+- [Pitch Deck](https://github.com/LXJ2/DelphiX/blob/main/design/assets/DelphiXv4.pdf)
 
 ## Contributors
-
-### sorted by first character
+- Rix 产品经理  
+- 0xSkipper 全栈工程师  
+- YYY 合约与后端工程师  
+- Rere web3前端开发工程师  
+- Sanji 合约工程师  

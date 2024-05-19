@@ -13,6 +13,7 @@ import { useEffect, useState } from 'react'
 import banner from 'public/banner.png'
 import Image from "next/image"
 import {stakeWeb,claimWeb,settleWinnerPriceWeb} from 'hooks/useContract.js'
+import CustomStatistic from "@/components/Statistic"
 
 
 const { Header, Content } = Layout
@@ -22,10 +23,11 @@ const ETHBeijing = () => {
   const [currentTab, setCurrentTab] = useState(1)
   const [currentCompetitionTab, setCurrentCompetitionTab] = useState(1)
 
-  const [competitionEndTime, setCompetitionEndTime] = useState('48:32:20')
-  const [betsEndsTime, setBetsEndsTime] = useState('24:15:13')
-  const [poolData, setPoolData] = useState(230)
-  const [adressAmount, setAdressAmount] = useState(321)
+  const [competitionStartTime, setCompetitionStartTime] = useState("2024-05-18 00:00:00")
+  const [competitionEndTime, setCompetitionEndTime] = useState("2024-05-19 22:00:00")
+  const [betsEndsTime, setBetsEndsTime] = useState("2024-05-19 16:00:00")
+  const [poolData, setPoolData] = useState(252.75)
+  const [adressAmount, setAdressAmount] = useState(16)
   const [OpenModel, setOpenModel] = useState(false)
   const [winAmount, setWinAmount] = useState(0)
   const [track, setTrack] = useState("")
@@ -130,9 +132,9 @@ const ETHBeijing = () => {
     await claimWeb(track)
   }
   return (
-    <Layout style={{ backgroundColor: '#fff', borderRadius: '10px' }}>
+    <Layout style={{backgroundColor: '#fff', borderRadius: '10px'}}>
       <Header>
-        <Menu style={{ fontSize: '20px' }} theme="light" mode="horizontal" defaultSelectedKeys={[1]}>
+        <Menu style={{fontSize: '20px'}} theme="light" mode="horizontal" defaultSelectedKeys={[1]}>
           {tabs.map(item => {
             return <Menu.Item key={item.index} onClick={() => {
               tabClick(item)
@@ -140,43 +142,45 @@ const ETHBeijing = () => {
           })}
         </Menu>
       </Header>
-      <Content style={{ padding: '20px', backgroundColor: '#fff' }}>
-        {currentTab == 1 ? <div style={{ background: '#f0f2f5', padding: '20px 0', borderRadius: '10px' }}>
+      <Content style={{padding: '20px', backgroundColor: '#fff'}}>
+        {currentTab == 1 ? <div style={{background: '#f0f2f5', padding: '20px 0', borderRadius: '10px'}}>
 
-          <div style={{ textAlign: 'center', background: '#e9e9e9', marginBottom: '20px' }}>
-            <Image src={banner} alt="image" />
+          <div style={{textAlign: 'center', background: '#e9e9e9', marginBottom: '20px'}}>
+            <Image src={banner} alt="image"/>
           </div>
-          <div style={{ padding: '0 50px' }}>
-            <section style={{ marginBottom: '40px' }}>
-              <Title level={2}>Intro & Rules</Title>
-              <Paragraph>
-                ETH Beijing is supported by ETH Foundation and Scroll to help Web3 coders in Ethereum to bring more ideas and grow...
-              </Paragraph>
-              <Paragraph>
-                DelphiX is to help users who focus on ETH Beijing with interest to participate betting "Who Is Winner". ETH Beijing Winner can get the grant of the 20% pool and bets users can get 80% if they bet the right result.
-              </Paragraph>
-            </section>
-            <div style={{ display: 'flex' }}>
-              <section style={{ marginBottom: '40px' }}>
-                <Title level={2}>Statistics</Title>
-                <Paragraph>Competition Ends in {competitionEndTime}</Paragraph>
-                <Paragraph>Place Bets Ends in {betsEndsTime}</Paragraph>
-                <Paragraph>
-                  Pool <Text strong>{poolData} USDT</Text>
-                </Paragraph>
-                <Paragraph>
-                  Betting <Text strong>{adressAmount} addresses</Text>
-                </Paragraph>
-              </section>
-              <section style={{ marginBottom: '40px', marginLeft: '400px' }}>
+
+
+          <div style={{padding: '0 50px'}}>
+            <Title level={2}>Intro & Rules</Title>
+            <Paragraph style={{fontSize: '18'}}>
+              ETH Beijing is supported by ETH Foundation and Scroll to help Web3 coders in Ethereum to bring more ideas and grow...
+            </Paragraph>
+            <Paragraph style={{fontSize: '18px'}}>
+              DelphiX is to help users who focus on ETH Beijing with interest to participate betting "Who Is Winner". ETH Beijing Winner can get the grant of the 20% pool and bets users can get 80% if they bet the right result.
+            </Paragraph>
+          </div>
+
+          <div style={{padding: '0 50px'}}>
+            <Row>
+              <Col span={12}>
+                <CustomStatistic competitionStartTime={competitionStartTime} competitionEndTime={competitionEndTime} betsEndsTime={betsEndsTime} addressCount={adressAmount} poolValue={poolData}/>
+              </Col>
+              <Col span={12} style={{textAlign: 'center'}}>
                 <Title level={2}>Winner</Title>
-                <Paragraph></Paragraph>
-                <div onClick={checkbet}>Check My Bet</div>
+                <Button onClick={checkbet}>Check My Bet</Button>
+              </Col>
+            </Row>
+          </div>
+
+
+          <div>
+            <div style={{display: 'flex'}}>
+              <section style={{marginBottom: '40px', marginLeft: '400px'}}>
               </section>
             </div>
             <section>
               <Title level={2}>Teams</Title>
-              <Menu style={{ fontSize: '16px', background: '#f0f2f5', marginBottom: '20px' }} theme="light" mode="horizontal" defaultSelectedKeys={[1]}>
+              <Menu style={{fontSize: '16px', background: '#f0f2f5', marginBottom: '20px'}} theme="light" mode="horizontal" defaultSelectedKeys={[1]}>
                 {competitionTabs.map(item => {
                   return <Menu.Item key={item.index} onClick={() => {
                     competitionTabsClick(item)
@@ -191,12 +195,12 @@ const ETHBeijing = () => {
                       <Paragraph>
                         {item.intro}
                       </Paragraph>
-                      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                      <div style={{display: 'flex', justifyContent: 'space-between'}}>
                         <Paragraph> Pool</Paragraph>
                         <Paragraph> {item.poolAmount} USDT</Paragraph>
                       </div>
-                      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <div style={{ display: 'flex', marginRight: '20px' }}>
+                      <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                        <div style={{display: 'flex', marginRight: '20px'}}>
                           <Button onClick={() => onDecrease(item.id, item.inputValue)}>-</Button>
                           <InputNumber
                             min={0}
@@ -206,8 +210,7 @@ const ETHBeijing = () => {
                           />
                           <Button onClick={() => onIncrease(item.id, item.inputValue)}>+</Button>
                         </div>
-                        
-                        <Button onClick={() => bet(competitionTabs[item.id-1].name,item.projectName,item.inputValue)}>Bets</Button>
+                        <Button onClick={bet}>Bets</Button>
                       </div>
                     </Card>
                   </Col>
@@ -222,18 +225,16 @@ const ETHBeijing = () => {
         open={OpenModel}
         title=""
         onCancel={handleCancel}
-        footer={[
-
-        ]}
+        footer={[]}
       >
-        <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
+        <div style={{display: 'flex', alignItems: 'center', flexDirection: 'column'}}>
           <Title level={2}>My Betting Result</Title>
           <Paragraph>Unfortunately, you have not won the forecast</Paragraph>
           <Paragraph>
-            <Text strong>Claim to get your reward {winAmount} USDT</Text>
+            <Text strong>Claim to get your reward 1000 USDT</Text>
           </Paragraph>
-          <div onClick={() => claim(track)} style={{ width: '100%', borderRadius: '25px', height: '32px', backgroundColor: 'yellow', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '10px', cursor: 'pointer' }}>Claim</div>
-          <div onClick={handleCancel} style={{ width: '100%', borderRadius: '25px', height: '32px', backgroundColor: '#f0f2f5', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>Close</div>
+          <div onClick={claim} style={{width: '100%', borderRadius: '25px', height: '32px', backgroundColor: 'yellow', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '10px', cursor: 'pointer'}}>Claim</div>
+          <div onClick={handleCancel} style={{width: '100%', borderRadius: '25px', height: '32px', backgroundColor: '#f0f2f5', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer'}}>Close</div>
         </div>
       </Modal>
     </Layout>
