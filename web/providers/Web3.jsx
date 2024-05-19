@@ -11,24 +11,53 @@ import "@rainbow-me/rainbowkit/styles.css"
 import { configureChains, createConfig, WagmiConfig, } from "wagmi"
 import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit"
 import {
-  sepolia,
-  scrollTestnet,
-  goerli,
+  scroll,
   mainnet,
   optimism,
   polygon,
-  zora,
-  bsc
-} from "wagmi/chains"
+  zora
+  
+
+} from "@wagmi/chains"
 import { publicProvider } from "wagmi/providers/public"
-console.log(sepolia, scrollTestnet);
+
+const scrollSepolia = {
+  id: 534351,
+  name: "Scroll Sepolia",
+  network: "scroll-sepolia",
+  nativeCurrency: {
+      name: "Ether",
+      symbol: "ETH",
+      decimals: 18,
+  },
+  rpcUrls: {
+      default: {
+          http: ["https://sepolia-rpc.scroll.io"],
+          webSocket: ["wss://sepolia-rpc.scroll.io/ws"],
+      },
+      public: {
+          http: ["https://sepolia-rpc.scroll.io"],
+          webSocket: ["wss://sepolia-rpc.scroll.io/ws"],
+      },
+  },
+  blockExplorers: {
+      default: {
+          name: "Blockscout",
+          url: "https://sepolia-blockscout.scroll.io",
+      },
+  },
+  testnet: true,
+};
+
 const { chains, publicClient, webSocketPublicClient } = configureChains(
   [
-    scrollTestnet,
-    ...(process.env.NEXT_PUBLIC_ENABLE_TESTNETS === "true" ? [scrollTestnet] : [])
+    mainnet,
+    scrollSepolia, 
+    ...(process.env.NEXT_PUBLIC_ENABLE_TESTNETS === "true" ? [scrollSepolia] : [])
   ],
   [publicProvider()]
 )
+
 const { connectors } = getDefaultWallets({
   appName: "Dapp Forge",
   projectId: "928c0944dc8279fb073a7405ecd6b657",
