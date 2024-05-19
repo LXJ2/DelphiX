@@ -12,7 +12,7 @@
 - Try it out: https://web-liard-three.vercel.app/
 - Selected Track:
 
-    - SCROLL & XXX
+    - SCROLL
 
 - Project Images
     - <img src="./design/assets/figma.png" >
