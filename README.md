@@ -9,7 +9,7 @@
 ## Overview
 
 - Project Name: DelphiX
-- Try it out: [https://delphix.vercel.app/](https://delphix.vercel.app/)
+- Try it out: https://web-liard-three.vercel.app/
 - Selected Track:
 
     - SCROLL & XXX
